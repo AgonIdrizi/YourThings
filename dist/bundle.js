@@ -86,14 +86,39 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/createToDo.js":
+/*!***************************!*\
+  !*** ./src/createToDo.js ***!
+  \***************************/
+/*! exports provided: todo */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"todo\", function() { return todo; });\nclass todo {\n  constructor(projectId,title, description, dueDate, priority){\n  \tthis._projectId = projectId,\n  \tthis._title = title;\n  \tthis._description = description;\n  \tthis._dueDate = dueDate;\n  \tthis._priority = priority;\n  }\n\nget values() {\n\treturn [this._projectId, this._title, this._description, this._dueDate, this._priority]\n}\n\n}\n\n\n\n//# sourceURL=webpack:///./src/createToDo.js?");
+
+/***/ }),
+
+/***/ "./src/getToDosOfaProject.js":
+/*!***********************************!*\
+  !*** ./src/getToDosOfaProject.js ***!
+  \***********************************/
+/*! exports provided: getToDosOfaProject */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getToDosOfaProject\", function() { return getToDosOfaProject; });\n/* harmony import */ var _createToDo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createToDo */ \"./src/createToDo.js\");\n\n\nconst getToDosOfaProject = (project_id) => {\n  var array_of_todo_objects = []\n  for ( var i = 0, len = localStorage.length; i < len; ++i ) {\n\n    let retrieveTodo = localStorage.getItem( localStorage.key( i ) ).split(',');\n    if (project_id == retrieveTodo[0]){\n      let todoObj = new _createToDo__WEBPACK_IMPORTED_MODULE_0__[\"todo\"](retrieveTodo[0], retrieveTodo[1], retrieveTodo[2], retrieveTodo[3], retrieveTodo[4])\n      array_of_todo_objects.push(todoObj);\n    }\n    \n  }\n  return array_of_todo_objects\n}\n\n\n\n//# sourceURL=webpack:///./src/getToDosOfaProject.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("console.log('ss');\n\n//# sourceURL=webpack:///./src/index.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _createToDo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createToDo */ \"./src/createToDo.js\");\n/* harmony import */ var _getToDosOfaProject__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getToDosOfaProject */ \"./src/getToDosOfaProject.js\");\n\n\n\nconsole.log('ss');\n\nvar ag = new _createToDo__WEBPACK_IMPORTED_MODULE_0__[\"todo\"](1, 'agg','sdfsd','fassrg','fdddd')\nvar vg = new _createToDo__WEBPACK_IMPORTED_MODULE_0__[\"todo\"]()\nconsole.log(ag._description)\nconsole.log(vg._description)\n\nlocalStorage.setItem('session',ag.values)\nconsole.log(localStorage.getItem('session'))\n\nconsole.log(Object(_getToDosOfaProject__WEBPACK_IMPORTED_MODULE_1__[\"getToDosOfaProject\"])(1))\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
