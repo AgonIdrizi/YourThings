@@ -1,7 +1,8 @@
 import { arrayObjectsOfAllProjects } from './getAllProjectsFromLocalStorage'
-
-const renderProjects = function (){
+import { clearProjectsElementsInDom } from './clearProjectsElementsInDom'
+function renderProjects (){
   var projectSection = document.querySelectorAll('#projects')[0]
+  clearProjectsElementsInDom();
   var arrayOfAllProjects = arrayObjectsOfAllProjects() ;
   arrayOfAllProjects.forEach(elem => {
   	let p = document.createElement('p')
@@ -10,6 +11,7 @@ const renderProjects = function (){
   	p.id = elem[0];
   	projectSection.append(p);
   });
+   console.log('renderproj')
 }
 
 export { renderProjects }

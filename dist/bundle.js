@@ -86,6 +86,42 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/addProjectInDom.js":
+/*!********************************!*\
+  !*** ./src/addProjectInDom.js ***!
+  \********************************/
+/*! exports provided: addProjectInDom */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"addProjectInDom\", function() { return addProjectInDom; });\n/* harmony import */ var _createProject__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createProject */ \"./src/createProject.js\");\n/* harmony import */ var _addProjectInLocalStorage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addProjectInLocalStorage */ \"./src/addProjectInLocalStorage.js\");\n/* harmony import */ var _clearProjectsElementsInDom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./clearProjectsElementsInDom */ \"./src/clearProjectsElementsInDom.js\");\n/* harmony import */ var _renderProjects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./renderProjects */ \"./src/renderProjects.js\");\n\n\n\n\nfunction addProjectInDom(e){\n  e.preventDefault();\n\tlet projectSection = document.querySelectorAll('#projects')[0]\n\tlet textInput = e.target.previousElementSibling\n\tif (textInput == \"\"){\n\t  return console.log('nothing in input') \n\t}\n\n\tconst proj = new _createProject__WEBPACK_IMPORTED_MODULE_0__[\"project\"](textInput.value)\n\tconsole.log(proj)\n\tObject(_addProjectInLocalStorage__WEBPACK_IMPORTED_MODULE_1__[\"addProjectInLocalStorage\"])(proj)\n\tObject(_clearProjectsElementsInDom__WEBPACK_IMPORTED_MODULE_2__[\"clearProjectsElementsInDom\"])()\n\tObject(_renderProjects__WEBPACK_IMPORTED_MODULE_3__[\"renderProjects\"])()\n\ttextInput.value = \"\"\n}\n\n \n\n//# sourceURL=webpack:///./src/addProjectInDom.js?");
+
+/***/ }),
+
+/***/ "./src/addProjectInLocalStorage.js":
+/*!*****************************************!*\
+  !*** ./src/addProjectInLocalStorage.js ***!
+  \*****************************************/
+/*! exports provided: addProjectInLocalStorage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"addProjectInLocalStorage\", function() { return addProjectInLocalStorage; });\n/* harmony import */ var _getAllProjectsFromLocalStorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getAllProjectsFromLocalStorage */ \"./src/getAllProjectsFromLocalStorage.js\");\n\nfunction addProjectInLocalStorage(project){\n  var newArrayOfProjectObjects = Object(_getAllProjectsFromLocalStorage__WEBPACK_IMPORTED_MODULE_0__[\"arrayObjectsOfAllProjects\"])().filter(elem =>{\n  \treturn elem;\n  })\n  \n  newArrayOfProjectObjects.push([project._projectId,project._name])\n  localStorage.setItem('projects', newArrayOfProjectObjects)\n  console.log(newArrayOfProjectObjects)\n}\n\n\n\n//# sourceURL=webpack:///./src/addProjectInLocalStorage.js?");
+
+/***/ }),
+
+/***/ "./src/clearProjectsElementsInDom.js":
+/*!*******************************************!*\
+  !*** ./src/clearProjectsElementsInDom.js ***!
+  \*******************************************/
+/*! exports provided: clearProjectsElementsInDom */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"clearProjectsElementsInDom\", function() { return clearProjectsElementsInDom; });\nfunction clearProjectsElementsInDom() {\n  let projectSection = document.querySelectorAll('#projects')[0]\n  projectSection.innerHTML = \"\";\n   \n }\n\n \n\n//# sourceURL=webpack:///./src/clearProjectsElementsInDom.js?");
+
+/***/ }),
+
 /***/ "./src/createProject.js":
 /*!******************************!*\
   !*** ./src/createProject.js ***!
@@ -130,7 +166,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getToDosOfaProject\", function() { return getToDosOfaProject; });\n/* harmony import */ var _createToDo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createToDo */ \"./src/createToDo.js\");\n\n\nconst getToDosOfaProject = (project_id) => {\n  var array_of_todo_objects = []\n  for ( var i = 0, len = localStorage.length; i < len; ++i ) {\n\n    let retrieveTodo = localStorage.getItem( localStorage.key( i ) ).split(',');\n    if (project_id == retrieveTodo[0]){\n      let todoObj = new _createToDo__WEBPACK_IMPORTED_MODULE_0__[\"todo\"](retrieveTodo[0], retrieveTodo[1], retrieveTodo[2], retrieveTodo[3], retrieveTodo[4])\n      array_of_todo_objects.push(todoObj);\n    }\n    \n  }\n  return array_of_todo_objects\n}\n\n\n\n//# sourceURL=webpack:///./src/getToDosOfaProject.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getToDosOfaProject\", function() { return getToDosOfaProject; });\n/* harmony import */ var _createToDo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createToDo */ \"./src/createToDo.js\");\n\n\nconst getToDosOfaProject = (project_id) => {\n  var array_of_todo_objects = []\n  for ( var i = 0, len = localStorage.length; i < len; ++i ) {\n\n    let retrieveTodo = localStorage.getItem( localStorage.key( i ) ).split(',');\n    if (project_id == parseInt(retrieveTodo[0])){\n      let todoObj = new _createToDo__WEBPACK_IMPORTED_MODULE_0__[\"todo\"](retrieveTodo[0], retrieveTodo[1], retrieveTodo[2], retrieveTodo[3], retrieveTodo[4])\n      array_of_todo_objects.push(todoObj);\n    }\n    \n  }\n  return array_of_todo_objects\n}\n\n\n\n//# sourceURL=webpack:///./src/getToDosOfaProject.js?");
 
 /***/ }),
 
@@ -138,11 +174,35 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! exports provided: renderProjects */
+/*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _createToDo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createToDo */ \"./src/createToDo.js\");\n/* harmony import */ var _getToDosOfaProject__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getToDosOfaProject */ \"./src/getToDosOfaProject.js\");\n/* harmony import */ var _createProject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./createProject */ \"./src/createProject.js\");\n/* harmony import */ var _renderProjects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./renderProjects */ \"./src/renderProjects.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"renderProjects\", function() { return _renderProjects__WEBPACK_IMPORTED_MODULE_3__[\"renderProjects\"]; });\n\n\n\n\n\n\nconsole.log('ss');\n\nvar ag = new _createToDo__WEBPACK_IMPORTED_MODULE_0__[\"todo\"](1, 'agg','sdfsd','fassrg','fdddd')\nvar project1 = new _createProject__WEBPACK_IMPORTED_MODULE_2__[\"project\"]('test')\nconsole.log(project1._projectId)\nconsole.log(ag._description)\n\nlocalStorage.setItem('1',ag.values)\n\nconsole.log(Object(_getToDosOfaProject__WEBPACK_IMPORTED_MODULE_1__[\"getToDosOfaProject\"])(1))\n\nrenderProjects()\n\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _createToDo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createToDo */ \"./src/createToDo.js\");\n/* harmony import */ var _getToDosOfaProject__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getToDosOfaProject */ \"./src/getToDosOfaProject.js\");\n/* harmony import */ var _createProject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./createProject */ \"./src/createProject.js\");\n/* harmony import */ var _renderProjects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./renderProjects */ \"./src/renderProjects.js\");\n/* harmony import */ var _removeProject__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./removeProject */ \"./src/removeProject.js\");\n/* harmony import */ var _addProjectInDom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./addProjectInDom */ \"./src/addProjectInDom.js\");\n\n\n\n\n\n\n\nconsole.log('ss');\n\nvar todo1 = new _createToDo__WEBPACK_IMPORTED_MODULE_0__[\"todo\"](1, 'agg','sdfsd','fassrg','fdddd')\nvar todo2 = new _createToDo__WEBPACK_IMPORTED_MODULE_0__[\"todo\"](2, 'agg','sdfsd','fassrg','fdddd')\nvar project1 = new _createProject__WEBPACK_IMPORTED_MODULE_2__[\"project\"]('test')\n\nconsole.log(project1._projectId)\nconsole.log(todo1._description)\n\nlocalStorage.setItem('1',todo1.values)\nlocalStorage.setItem('2',todo2.values)\n\nconsole.log(Object(_getToDosOfaProject__WEBPACK_IMPORTED_MODULE_1__[\"getToDosOfaProject\"])(1))\nObject(_removeProject__WEBPACK_IMPORTED_MODULE_4__[\"removeProject\"])(2)\nObject(_renderProjects__WEBPACK_IMPORTED_MODULE_3__[\"renderProjects\"])()\n\nvar addProjectButton = document.querySelector('.add-project').lastElementChild\nconsole.log(addProjectButton)\naddProjectButton.addEventListener('click',_addProjectInDom__WEBPACK_IMPORTED_MODULE_5__[\"addProjectInDom\"])\n\n\n\n\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/removeProject.js":
+/*!******************************!*\
+  !*** ./src/removeProject.js ***!
+  \******************************/
+/*! exports provided: removeProject */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"removeProject\", function() { return removeProject; });\n/* harmony import */ var _getAllProjectsFromLocalStorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getAllProjectsFromLocalStorage */ \"./src/getAllProjectsFromLocalStorage.js\");\n/* harmony import */ var _removeTodoOfaProject__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./removeTodoOfaProject */ \"./src/removeTodoOfaProject.js\");\n\n\nconst removeProject = function (project_id){\n  var arrOfProjectObjects = Object(_getAllProjectsFromLocalStorage__WEBPACK_IMPORTED_MODULE_0__[\"arrayObjectsOfAllProjects\"])()\n  var newArrayOfProjectObjects = arrOfProjectObjects.filter(elem =>{\n  \tif (elem[0] != project_id)\n  \treturn elem;\n  })\n  localStorage.setItem('projects', newArrayOfProjectObjects) \n  Object(_removeTodoOfaProject__WEBPACK_IMPORTED_MODULE_1__[\"removeAllTodosOfaProject\"])()\n}\n\n\n\n//# sourceURL=webpack:///./src/removeProject.js?");
+
+/***/ }),
+
+/***/ "./src/removeTodoOfaProject.js":
+/*!*************************************!*\
+  !*** ./src/removeTodoOfaProject.js ***!
+  \*************************************/
+/*! exports provided: removeTodoOfaProject, removeAllTodosOfaProject */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"removeTodoOfaProject\", function() { return removeTodoOfaProject; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"removeAllTodosOfaProject\", function() { return removeAllTodosOfaProject; });\nconst removeTodoOfaProject = (project_id, todo_id) => {\n  for ( var i = 0, len = localStorage.length; i < len; ++i ) {\n   let retrieveTodo = localStorage.getItem( localStorage.key( i ) ).split(',');\n    if (todo_id == i && project_id == retrieveTodo[0]){\n      localStorage.removeItem(i)\n    }\n    \n  }\n  \n}\n\nconst removeAllTodosOfaProject = (project_id) =>{\n  for ( var i = 0, len = localStorage.length; i < len; ++i ) {\n  let retrieveTodo = localStorage.getItem( localStorage.key( i ) ).split(',');\n    if (project_id == retrieveTodo[0]){\n      localStorage.removeItem(i)\n    }\n    \n  }\n}\n\n\n\n//# sourceURL=webpack:///./src/removeTodoOfaProject.js?");
 
 /***/ }),
 
@@ -154,7 +214,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _cre
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"renderProjects\", function() { return renderProjects; });\n/* harmony import */ var _getAllProjectsFromLocalStorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getAllProjectsFromLocalStorage */ \"./src/getAllProjectsFromLocalStorage.js\");\n\n\nconst renderProjects = function (){\n  var projectSection = document.querySelectorAll('#projects')[0]\n  var arrayOfAllProjects = Object(_getAllProjectsFromLocalStorage__WEBPACK_IMPORTED_MODULE_0__[\"arrayObjectsOfAllProjects\"])() ;\n  arrayOfAllProjects.forEach(elem => {\n  \tlet p = document.createElement('p')\n  \tp.innerText = elem[1];\n  \tp.className = 'projects';\n  \tp.id = elem[0];\n  \tprojectSection.append(p);\n  });\n}\n\n\n\n//# sourceURL=webpack:///./src/renderProjects.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"renderProjects\", function() { return renderProjects; });\n/* harmony import */ var _getAllProjectsFromLocalStorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getAllProjectsFromLocalStorage */ \"./src/getAllProjectsFromLocalStorage.js\");\n/* harmony import */ var _clearProjectsElementsInDom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./clearProjectsElementsInDom */ \"./src/clearProjectsElementsInDom.js\");\n\n\nfunction renderProjects (){\n  var projectSection = document.querySelectorAll('#projects')[0]\n  Object(_clearProjectsElementsInDom__WEBPACK_IMPORTED_MODULE_1__[\"clearProjectsElementsInDom\"])();\n  var arrayOfAllProjects = Object(_getAllProjectsFromLocalStorage__WEBPACK_IMPORTED_MODULE_0__[\"arrayObjectsOfAllProjects\"])() ;\n  arrayOfAllProjects.forEach(elem => {\n  \tlet p = document.createElement('p')\n  \tp.innerText = elem[1];\n  \tp.className = 'projects';\n  \tp.id = elem[0];\n  \tprojectSection.append(p);\n  });\n   console.log('renderproj')\n}\n\n\n\n//# sourceURL=webpack:///./src/renderProjects.js?");
 
 /***/ })
 
