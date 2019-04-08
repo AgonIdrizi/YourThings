@@ -4,10 +4,10 @@ function makeProjectFieldActive (e){
 
   Array.prototype.forEach.call(proje, elem => {
   	elem.classList.remove('p-active');
-  	elem.style.backgroundColor = '#DDDDDD';
+  	elem.style.backgroundColor = 'rgb(255, 255, 255)';
   })
   e.target.classList.add('p-active');
-  e.target.style.backgroundColor = 'red';
+  e.target.style.backgroundColor = '#DDDDDD';
 }
 
 export { makeProjectFieldActive }
