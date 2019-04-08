@@ -2,17 +2,42 @@
 <html>
   <head>
     <title>Getting Started</title>
+    <script src="plain-modal.min.js"></script>
     <link rel="stylesheet" href="style.css"></link>
   </head>
   <body>
   	<nav class="nav navbar navbar-light bg-light fixed-top" >
   	</nav>
-  	  <form class="add-project">
-        <input type="text" placeholder="Enter project name">
-        <input type="button" value="Add Project">
-      </form>
+  	<form class="add-project">
+      <input type="text" placeholder="Enter project name">
+      <input type="button" value="Add Project">
+    </form>
     <section id="projects">
   	</section>
+    <form class="add-todo">
+      <button type="button" data-toggle="modal" data-target="#myModal">New todo</button>
+    </form>
+    <section id="todos">
+    </section>
+    <div class="modal fade" style=" display: none; " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+       <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
     <script src="bundle.js"></script>
   </body>
 </html>

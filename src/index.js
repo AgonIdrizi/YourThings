@@ -25,5 +25,13 @@ var addProjectButton = document.querySelector('.add-project').lastElementChild
 console.log(addProjectButton)
 addProjectButton.addEventListener('click',addProjectInDom)
 
+var newTodoButton = document.querySelector('.add-todo').firstElementChild
+//newTodoButton.addEventListener('click',)
+var modal = new PlainModal(document.getElementById('modal-content'));
+console.log(modal)
+
+
+
+
 
 

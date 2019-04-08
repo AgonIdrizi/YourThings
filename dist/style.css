@@ -1,0 +1,38 @@
+body {
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 80px 40px auto 40px;
+  grid-template-areas:
+  	  "h h h h h h h h h h h h"
+  	  ". . f f f . a a a . . ."
+  	  ". . p p p . t t t . . ."
+  	  ". . . . . . . . . . . .";
+}
+
+
+#projects {
+	grid-area: p;
+}
+.add-project {
+	grid-area: f;
+}
+
+#todos {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 60px;
+	grid-auto-rows: 60px;
+	grid-area: t;
+}
+
+.add-todo {
+	grid-area: a;
+
+}
+
+.todo {
+	display: -webkit-inline-box;
+	border: 1px solid grey;
+	
+}

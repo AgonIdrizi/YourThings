@@ -1,5 +1,7 @@
 import { arrayObjectsOfAllProjects } from './getAllProjectsFromLocalStorage'
 import { clearProjectsElementsInDom } from './clearProjectsElementsInDom'
+import { makeProjectFieldActive } from './makeProjectFieldActive'
+import { renderTodos } from './renderTodos'
 function renderProjects (){
   var projectSection = document.querySelectorAll('#projects')[0]
   clearProjectsElementsInDom();
@@ -10,8 +12,10 @@ function renderProjects (){
   	p.className = 'projects';
   	p.id = elem[0];
   	projectSection.append(p);
+    p.addEventListener('click', makeProjectFieldActive)
+    p.addEventListener('click', renderTodos)
   });
-   console.log('renderproj')
+
 }
 
 export { renderProjects }
