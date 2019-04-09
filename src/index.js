@@ -5,6 +5,9 @@ import { project } from './createProject'
 import { renderProjects } from './renderProjects'
 import { removeProject } from './removeProject'
 import { addProjectInDom } from './addProjectInDom'
+import { addTodoInDom } from './addTodoInDom'
+import  MicroModal  from 'micromodal'
+
 
 
 import '@fortawesome/fontawesome-free/js/fontawesome'
@@ -32,10 +35,16 @@ var addProjectButton = document.querySelector('.add-project').lastElementChild
 console.log(addProjectButton)
 addProjectButton.addEventListener('click',addProjectInDom)
 
+
+
+
+
 var newTodoButton = document.querySelector('.add-todo').firstElementChild
-//newTodoButton.addEventListener('click',)
-var modal = new PlainModal(document.getElementById('modal-content'));
-console.log(modal)
+newTodoButton.addEventListener('click', addTodoInDom)
+
+
+
+
 
 
 
