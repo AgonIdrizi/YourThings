@@ -4,10 +4,10 @@ body {
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 80px 40px auto 40px;
   grid-template-areas:
-  	  "h h h h h h h h h h h h"
-  	  ". . f f f . a a a . . ."
-  	  ". . p p p . t t t t . ."
-  	  ". . . . . . . . . . . .";
+  	  "h h h h h h h h h h h h h"
+  	  ". . f f f f . a a a . . ."
+  	  ". . p p p . . t t t t . ."
+  	  ". . . . . . . . . . . . .";
 }
 
 
@@ -267,4 +267,33 @@ body {
 
 .select-style select:focus {
     outline: none;
+}
+
+
+
+.btn {
+color: #fff !important;
+text-transform: uppercase;
+background: #ed3330;
+padding: 10px;
+border-radius: 3px;
+display: inline-block;
+border: none;
+}
+
+.btn:hover {
+background: #434343;
+letter-spacing: 1px;
+-webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+-moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+transition: all 0.4s ease 0s;
+}
+
+.input-project {
+    border-bottom-width: 1px;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px;
+    height: 30px;
 }

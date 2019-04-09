@@ -1,7 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Getting Started</title>
+    <meta charset="utf-8">
     <script src="plain-modal.min.js"></script>
     <link rel="stylesheet" href="style.css"></link>
   </head>
@@ -9,14 +10,15 @@
   	<nav class="nav navbar navbar-light bg-light fixed-top" >
   	</nav>
   	<form class="add-project">
-      <input type="text" placeholder="Enter project name">
-      <input type="button" value="Add Project">
+      <input type="text"class="input-project" placeholder="Enter project name">
+      <input type="button" class="btn" value="Add Project">
     </form>
     <section id="projects">
   	</section>
     <form class="add-todo">
-      <button type="button" data-micromodal-trigger="modal-1" >New todo</button>
+      <button type="button" class="btn" data-micromodal-trigger="modal-1" >New todo</button>
     </form>
+
     <section id="todos">
     </section>
     <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
