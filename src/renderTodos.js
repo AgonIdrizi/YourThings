@@ -3,15 +3,17 @@ function renderTodos(e) {
   const project_id = e.target.id;
   console.log(e.target)
   const arrayOfObjectTodos = getToDosOfaProject(project_id)
-  const todosSection = document.querySelectorAll('#todos')[0]
-  todosSection.innerHTML = "";
-  addTodosInDom(arrayOfObjectTodos, todosSection, project_id)
+  
+  renderTodosInDom(arrayOfObjectTodos, project_id)
 
-  todosSection.forEach
+  
 }
 
 
-function addTodosInDom(arrayOfObjectTodos, todosSection, project_id) {
+function renderTodosInDom(arrayOfObjectTodos, project_id) {
+  const todosSection = document.querySelectorAll('#todos')[0]
+  todosSection.innerHTML = "";
+
   arrayOfObjectTodos.forEach(elem => {
   	if(project_id == parseInt(elem._projectId) ){
   	  let div = document.createElement('div');
@@ -108,4 +110,4 @@ function addTodosInDom(arrayOfObjectTodos, todosSection, project_id) {
 
 
 
-export { renderTodos }
+export { renderTodos, renderTodosInDom }

@@ -1,6 +1,6 @@
 import  MicroModal  from 'micromodal';
-
-
+import { getToDosOfaProject} from './getToDosOfaProject';
+import { renderTodosInDom }  from './renderTodos';
 MicroModal.init({
     onShow: modal => console.info(`${modal.id} is shown`), // [1]
     onClose: modal => console.info(`${modal.id} is hidden`), // [2]
@@ -21,47 +21,68 @@ function addTodoInDom(e) {
   newTodoButton.addEventListener('click', MicroModal.show('modal-1') );
 
   SaveButton.addEventListener('click', addTodoInLocalStorage)
+
+ 
   
 }
 
 function addTodoInLocalStorage(e) {
     e.preventDefault()
     let allProjects = document.querySelectorAll('.projects')
-    let getIdOfSelectedProject;
+    let IdOfSelectedProject = 1;
      Array.prototype.forEach.call(allProjects, elem => {
       if (elem.classList.contains('p-active')){
-         getIdOfSelectedProject =  elem.id;
-      }else { //return default 1
-        getIdOfSelectedProject = 1;
+         IdOfSelectedProject =  elem.id;
       }
     })
-    console.log(getIdOfSelectedProject)
+    let arrayOfTodoObjects = getToDosOfaProject(IdOfSelectedProject)
     
+    extractDataFromTodoModal(IdOfSelectedProject)
 
-  ///function extractDataFromTodoModal (){
-    let title = document.querySelector('.title')
-    let description = document.querySelector('.description');
-    let date = document.querySelector('.dueDate')
-    let priority = document.querySelector('.priority')
-    let options = []
-    Array.prototype.forEach.call(priority.children, elem => {
-        options.push(elem);
-      })
-    console.log(options)
-    let selectedOption = options[priority.options.selectedIndex]
 
-    localStorage.setItem(MaxTodoKeyInLocalStorage(),`${getIdOfSelectedProject.toString()},${title.value.trim()},${description.value.trim()},${date.value},${selectedOption.value}`)
-     
-     
+    clearModal()
+    setTimeout(MicroModal.close('modal-1'), 2000)
+    
+    renderTodosInDom(arrayOfTodoObjects, IdOfSelectedProject)
+  
+}
+function clearModal() {
+  let title = document.querySelector('.title')
+  let description = document.querySelector('.description');
+  let date = document.querySelector('.dueDate')
   
 
-  function MaxTodoKeyInLocalStorage() {
-    var retrieveTodosKeys =[]
-    for ( var i = 0, len = localStorage.length; i < len; ++i ) {
-      retrieveTodosKeys.push(i); 
+  title.value = "";
+  description.value = "";
+  date.value = "";
+}
+
+function extractDataFromTodoModal (IdOfSelectedProject){
+  let title = document.querySelector('.title')
+  let description = document.querySelector('.description');
+  let date = document.querySelector('.dueDate')
+  let priority = document.querySelector('.priority')
+  let options = []
+  Array.prototype.forEach.call(priority.children, elem => {
+    options.push(elem);
+    })
+    
+  let selectedOption = options[priority.options.selectedIndex]
+
+  localStorage.setItem(MaxTodoKeyInLocalStorage(),`${IdOfSelectedProject.toString()},${title.value.trim()},${description.value.trim()},${date.value},${selectedOption.value}`)
+
+}
+
+function MaxTodoKeyInLocalStorage() {
+  let retrieveTodosKeys =[]
+  for ( let i = 0, len = localStorage.length; i < len; ++i ) {
+    if ( !isNaN(parseInt(localStorage.key( i ))) ){
+      retrieveTodosKeys.push(localStorage.key( i ))
     }
-    return Math.max(...retrieveTodosKeys) +1;
+      
   }
+    
+  return Math.max(...retrieveTodosKeys) +1;
 }
   
 
