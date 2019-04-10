@@ -1,37 +1,61 @@
-import { getToDosOfaProject} from './getToDosOfaProject'
-function renderTodos(e) {
-  const project_id = e.target.id;
-  console.log(e.target)
-  const arrayOfObjectTodos = getToDosOfaProject(project_id)
-  
-  renderTodosInDom(arrayOfObjectTodos, project_id)
+//
+import {format, compareAsc, parse} from 'date-fns'
+import { showTodoDetails } from './showTodoDetails'
+//import { deleteTodo } from './deleteTodo'
 
-  
+function removeTodosFromDom (){
+  let todosSection = document.querySelector('#todos')
+  let previousTodos = document.querySelectorAll('.todo');
+  let previousTodoDetails = document.querySelectorAll('.collapse');
+  [...previousTodos].forEach(div => {
+    todosSection.removeChild(div);
+  });
+  [...previousTodoDetails].forEach(div => {
+    todosSection.removeChild(div);
+  });
 }
+const renderTodos = () => {
+  let todosSection = document.querySelector('#todos')
+  let activeProject = document.querySelector('.p-active').parentElement
+  let projects = JSON.parse(localStorage.getItem('Projects'));
 
 
-function renderTodosInDom(arrayOfObjectTodos, project_id) {
-  const todosSection = document.querySelectorAll('#todos')[0]
-  todosSection.innerHTML = "";
+  //delete previous todos
+  removeTodosFromDom ()
+  
+  console.log(projects)
 
-  arrayOfObjectTodos.forEach(elem => {
-  	if(project_id == parseInt(elem._projectId) ){
-  	  let div = document.createElement('div');
-      console.log(elem._priority)
-  	  div.classList.add('todo',elem._priority);
-  	  div.id = elem._projectId;
+  //render todos
+  projects.forEach(project => {
+    if (project.id == activeProject.id) {
+      project.todos.forEach(todo =>{
+        console.log('inside div create')
 
-  	  let header = document.createElement('p');
-  	  header.innerText = `Title: ${elem._title}`;
+      let todoDiv = document.createElement('div');
+      console.log(todo.priority)
 
-  	  let description = document.createElement('p')
-  	  description.innerText = `Description: ${elem._description}`;
+      //render todo color acording to priority
+      if (todo.priority === "Normal"){
+        todoDiv.style.backgroundColor = "#ffd400";
+      }else if (todo.priority === "High"){
+        todoDiv.style.backgroundColor = "#ff8100";
+      }
 
-  	  let dueDate = document.createElement('p');
-  	  dueDate.innerText = `Due Date: ${elem._dueDate}`;
+      todoDiv.addEventListener("click", showTodoDetails,false)
+      todoDiv.classList.add('todo');
+      todoDiv.setAttribute("id", todo.id)
 
-  	  let priority = document.createElement('p');
-  	  priority.innerText = `Priority: ${elem._priority}`;
+      let header = document.createElement('p');
+      header.innerText = `Title: ${todo.title}`;
+
+      let description = document.createElement('p')
+      description.innerText = `Description: ${todo.description}`;
+
+      let dueDate = document.createElement('p');
+      dueDate.innerText = `Due Date: ${format(todo.dueDate, "MMM[ ]DD[, ]YYYY")}`;
+
+      let priority = document.createElement('p');
+      priority.innerText = `Priority: ${todo.priority}`;
       
       let collapseDiv = document.createElement('div')
       collapseDiv.className = 'collapse';
@@ -44,70 +68,50 @@ function renderTodosInDom(arrayOfObjectTodos, project_id) {
       link.href ="#"
       link.append(icon)
       
-  	  
-      todosSection.append(div);
-      todosSection.append(collapseDiv);
-  	  div.append(header);
-  	  collapseDiv.append(description);
-  	  collapseDiv.append(dueDate);
-  	  div.append(priority);
-      collapseDiv.append(link);
-
-      link.addEventListener('click', deleteTodoFromLocalStorage)
-
-  	}
-  	
-  })
-  function deleteTodoFromLocalStorage(e){
-    e.preventDefault()
-    let thisParentDiv = e.target.parentNode.parentNode.parentNode
-    let previousDiv = e.target.parentNode.parentNode.parentNode.previousElementSibling
-    let title = previousDiv.firstElementChild.innerText.substr(6)
-    arrayOfObjectTodos.forEach(elem => {
-      for ( var i = 0, len = localStorage.length; i < len; ++i ) {
-        let retrieveTodo = localStorage.getItem( localStorage.key( i ) ).split(',');
-        if (elem._title == title && project_id == retrieveTodo[0]){
-          localStorage.removeItem(i)
-        }
-    
-      }
       
-    })
-    previousDiv.innerHTML = "";
-    previousDiv.style.display = 'none'
-    thisParentDiv.innerHTML = "";
-    thisParentDiv.style.display = 'none'
+      todosSection.appendChild(todoDiv);
+      todosSection.appendChild(collapseDiv);
+      todoDiv.appendChild(header);
+      collapseDiv.appendChild(description);
+      collapseDiv.appendChild(dueDate);
+      todoDiv.appendChild(priority);
+      collapseDiv.appendChild(link);
 
-    console.log(e.target.parentNode.parentNode.parentNode.previousElementSibling)
-  }
-  
-  const alltodos = document.querySelectorAll('.todo')
-  alltodos.forEach(elem =>{
-    elem.addEventListener('click',expand)
+      link.addEventListener('click', deleteTodo, false)
+      })
+    }
   })
-
-  function expand(e){
-    if(e.target != this){ return true; }
-
-    e.preventDefault()
-
-    let collapseDiv = e.target.nextElementSibling
-    //make all other divs that doesnt include this
-    alltodos.forEach(elem => {
-      if( elem != e.target) {
-        elem.nextElementSibling.style.display = "none"
-      }
-    })
-
-    if (collapseDiv.style.display == 'none'){
-      collapseDiv.style.display = ""
-    } else if (collapseDiv.style.display = "block"){
-     collapseDiv.style.display = "none"
+  function deleteTodo (e){
+    
+    e.stopPropagation();
+    
+    if(confirm("Are you sure deleting this todo?")) {
+      let activeProject = document.querySelector('.p-active').parentElement
+      let projects = JSON.parse(localStorage.getItem("Projects"));
+      let parentDivId = e.target.parentElement.parentElement.parentElement.previousElementSibling.id
+      console.log(e.target.parentElement.parentElement.parentElement.previousElementSibling.id)
+        projects.forEach(project => {
+          if (project.id == activeProject.id) {
+            project.todos = project.todos.filter(todo => {
+              return todo.id != parentDivId
+            });
+          }
+      
+        });
+       
+      localStorage.setItem("Projects", JSON.stringify(projects));
+      
+      //render
+      renderTodos();
     }
   }
-
 }
 
 
 
-export { renderTodos, renderTodosInDom }
+
+
+
+
+
+export { renderTodos }

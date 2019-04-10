@@ -1,19 +1,38 @@
-export class project {
-  constructor(name){
-  	this._name = name;
-    this._projectId = maxIdofProjectsinLocalStorage()
-    
-   function maxIdofProjectsinLocalStorage (){
-      let idsOfProjects = localStorage.getItem('projects').split(',').filter(elem => !isNaN(parseInt(elem)))
-      //get latest id of a project stored in localstorage, or set it to 1
-      let max = Math.max(...idsOfProjects) || 1
-      return  max + 1;
-    }
-  	
-  }
 
-  get values() {
-	return [this._projectId, this._name]
+import { renderProjects } from "./renderProjects"
+
+const Project = (id, name, todos) =>{
+  return {id, name, todos}
+}
+
+
+
+const createProject = e => {
+  e.preventDefault();
+
+  let projects = JSON.parse(localStorage.getItem("Projects")),
+   id = projects[projects.length - 1] !== undefined
+            ? projects[projects.length-1].id
+            : 0;
+
+  const addProjectInput = document.querySelector('.add-project').firstElementChild;
+  const ProjectSection = document.querySelector('#projects');
+
+  if (addProjectInput.value !== ""){
+    id++;
+    const project = Project(id, addProjectInput.value, []);
+
+    addProjectInput.value = "";
+
+    projects.push({id: project.id, name: project.name, todos: project.todos})
+    localStorage.setItem("Projects",JSON.stringify(projects));
+    
+    renderProjects();
+  }else {
+    //here put error div
+    console.log('cant add project without name')
   }
 
 }
+
+export { createProject }

@@ -17,7 +17,7 @@ body {
 #projects p {
 	margin-top: 2px;
 	margin-bottom: 2px;
-	background-color: rgb(255, 255, 255);
+	
 	border: 1px solid #ccc8c8;
 	text-align: center;
 	height: 30px;
@@ -41,6 +41,14 @@ body {
 
 }
 
+.project {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+.p-active {
+  background-color: #DDDDDD;
+}
 
 
 .add-todo {
