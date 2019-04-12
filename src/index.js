@@ -12,7 +12,7 @@ import  MicroModal  from 'micromodal'
 
 import { createProject } from './createProject'
 import { renderProjects } from './renderProjects'
-
+import { showTodoModal } from './showTodoModal'
 
 import '@fortawesome/fontawesome-free/js/fontawesome'
 import '@fortawesome/fontawesome-free/js/solid'
@@ -49,6 +49,9 @@ renderProjects()
 var addProjectButton = document.querySelector('.add-project').lastElementChild
 addProjectButton.addEventListener('click',createProject)
 
+var newTodoButton = document.querySelector('.add-todo').firstElementChild
+
+newTodoButton.addEventListener('click', showTodoModal)
 
 
 

@@ -21,7 +21,7 @@ function renderProjects (){
 import { switchProject } from './switchProject'
 import { deleteProject } from './deleteProject'
 const renderProjects = () => {
-  if ((localStorage.getItem("Projects") === undefined) || (localStorage.getItem("Projects") === "[]")) {
+  if ( (localStorage.getItem("Projects") === undefined) || (localStorage.getItem("Projects") === "[]") || (localStorage.getItem("Projects") === null) ) {
     localStorage.setItem(
       "Projects",
       JSON.stringify([
