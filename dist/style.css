@@ -10,6 +10,25 @@ body {
   	  ". . . . . . . . . . . . .";
 }
 
+.nav {
+  grid-area: h;
+  display: grid;
+  grid-template-columns: 1fr 50px;
+  grid-template-rows: 50px;
+  background-color: #e05252;
+  height: 50px;
+}
+.nav h2 {
+  font-size: 2.5em;
+  margin-top: 0px;
+  color: white;
+  text-align: center;
+}
+
+.svg-inline--fa.fa-github {
+height: 3em;
+width: 3em;
+}
 
 #projects {
 	grid-area: p;
